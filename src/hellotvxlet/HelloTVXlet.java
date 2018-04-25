@@ -96,8 +96,9 @@ UserEventListener{
        //  private HScene scene;
        //private HStaticText hst;
        
-       hst = new HStaticText("Mijn winkelmandje: \n",300,100,300,400); //x,y,w,h
+       hst = new HStaticText(" \n",400,100,300,400); //x,y,w,h
        hst.setVerticalAlignment(HStaticText.VALIGN_TOP);
+       hst.setHorizontalAlignment(HStaticText.HALIGN_RIGHT);
        //TO DO: gebruik string tekst = hst.getTextContent(HVisible.NORMAL_STATE);
        //en hst.setTextContent(text, HVisible.NORMAL_STATE); om de tekst aan te passen
        //in UserEventReceived
@@ -128,16 +129,22 @@ UserEventListener{
             if(e.getCode()==HRcEvent.VK_ENTER){
                 String bestelling = hst.getTextContent(HVisible.NORMAL_STATE);
                 if(huidig ==0){
-                    bestelling = bestelling + "Meat Lovers\n";  
+                    bestelling = bestelling + "Batman - The Dark Knight\n";  
                 }
                 if(huidig ==1){
-                    bestelling = bestelling + "Pepperoni\n";  
+                    bestelling = bestelling + "Star Wars - The Last Jedi\n";  
                 }
                 if(huidig ==2){
-                    bestelling = bestelling + "Cheese Lovers\n";  
+                    bestelling = bestelling + "New Kids - Turbo\n";  
                 }
                 if(huidig ==3){
-                    bestelling = bestelling + "Vegi Lovers\n";  
+                    bestelling = bestelling + "The Avengers\n";  
+                }
+                if(huidig ==4){
+                    bestelling = bestelling + "The Hangover\n";  
+                }
+                if(huidig ==5){
+                    bestelling = bestelling + "Yes Man\n";  
                 }
                 hst.setTextContent(bestelling, HVisible.NORMAL_STATE);
                   hst.repaint();
