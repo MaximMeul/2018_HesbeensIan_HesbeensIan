@@ -35,7 +35,7 @@ UserEventListener{
  HStillImageBackgroundConfiguration bgConfiguration;
  
  //C:\Program Files\TechnoTrend\TT-MHP-Browser\fileio\DSMCC\0.0.3
- HBackgroundImage image[]=new HBackgroundImage[6];
+ HBackgroundImage image[]=new HBackgroundImage[7];
  int geladen =0;
  int huidig = 0;
     private HScene scene;
@@ -76,8 +76,9 @@ UserEventListener{
        image[3]=new HBackgroundImage("TheAvengersPROXIMUS.png");
        image[4]=new HBackgroundImage("TheHangoverPROXIMUS.png");
        image[5]=new HBackgroundImage("YesManPROXIMUS.png");
+       image[6]=new HBackgroundImage("Factuur.png");
        
-       for(int i=0;i<6;i++)
+       for(int i=0;i<7;i++)
         { 
             image[i].load(this); 
         }
@@ -160,6 +161,9 @@ UserEventListener{
                 if(huidig<0){
                     huidig = 5;
                 }
+            }
+            if(e.getCode()==HRcEvent.VK_UP){
+                huidig = 6;
             }
             try{
                 bgConfiguration.displayImage(image[huidig]);
