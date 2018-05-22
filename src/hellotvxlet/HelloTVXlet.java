@@ -40,7 +40,12 @@ UserEventListener{
  int huidig = 0;
     private HScene scene;
     private HStaticText hst;
+    //private HStaticText totaalPrijs;
     private HStaticText infoFilm;
+    private boolean pushed;
+    private boolean infoIsVisible = true;
+    private boolean factuurIsVisible = false;
+    
   
     public HelloTVXlet() {
         
@@ -83,7 +88,6 @@ UserEventListener{
         { 
             image[i].load(this); 
         }
-       
        UserEventRepository repo = new UserEventRepository("naam");
        repo.addAllArrowKeys();
        repo.addKey(HRcEvent.VK_ENTER);
@@ -99,18 +103,19 @@ UserEventListener{
        //private HStaticText hst;
        
        hst = new HStaticText(" \n",400,100,300,400); //x,y,w,h
-       infoFilm = new HStaticText("qsdsqdqsds \n",50,300,300,400); //x,y,w,h
+       //totaalPrijs = new HStaticText("$" ,320,100,300,400); //x,y,w,h
+       infoFilm = new HStaticText(" \n",70,320,300,400); //x,y,w,h
        hst.setVerticalAlignment(HStaticText.VALIGN_TOP);
        hst.setHorizontalAlignment(HStaticText.HALIGN_RIGHT);
        //TO DO: gebruik string tekst = hst.getTextContent(HVisible.NORMAL_STATE);
        //en hst.setTextContent(text, HVisible.NORMAL_STATE); om de tekst aan te passen
        //in UserEventReceived
        scene.add(hst);
+       //scene.add(totaalPrijs);
        scene.add(infoFilm);
        scene.validate();
        scene.setVisible(true);
     }
-    
     
     public void imageLoaded(HBackgroundImageEvent e) {
         geladen++;
@@ -129,9 +134,12 @@ UserEventListener{
     }
 
     public void userEventReceived(UserEvent e) {
+        String info = infoFilm.getTextContent(HVisible.NORMAL_STATE);
+        String bestelling = hst.getTextContent(HVisible.NORMAL_STATE);
+        //String bestellingPrijs = totaalPrijs.getTextContent(HVisible.NORMAL_STATE);
         if(e.getType()==HRcEvent.KEY_PRESSED){
             if(e.getCode()==HRcEvent.VK_ENTER){
-                String bestelling = hst.getTextContent(HVisible.NORMAL_STATE);
+
                 if(huidig ==0){
                     bestelling = bestelling + "Batman - The Dark Knight\n";
                 }
@@ -148,55 +156,82 @@ UserEventListener{
                     bestelling = bestelling + "The Hangover\n";
                 }
                 if(huidig ==5){
-                    bestelling = bestelling + "Yes Man\n";  
+                    bestelling = bestelling + "Yes Man\n";
                 }
                 hst.setTextContent(bestelling, HVisible.NORMAL_STATE);
-                  hst.repaint();             
+                hst.repaint();
+                //totaalPrijs.setTextContent(bestellingPrijs, HVisible.NORMAL_STATE);
+                //totaalPrijs.repaint(); 
             }
-            if(e.getCode()==HRcEvent.VK_DOWN){
-                String info = infoFilm.getTextContent(HVisible.NORMAL_STATE);
-                if(huidig ==0){
-                    
-                    info = "BATMAAAAAN";
+            if(e.getCode()==HRcEvent.VK_UP){
+                
+                if (infoIsVisible == true){
+                    if(huidig ==0){
+                        info = "$4.99";
+                        infoIsVisible = false;
+                    }
+                    if(huidig ==1){
+                        info = "$5.99";
+                        infoIsVisible = false;
+                    }
+                    if(huidig ==2){
+                        info = "$8.99";
+                        infoIsVisible = false;
+                    }
+                    if(huidig ==3){
+                        info = "$5.99";
+                        infoIsVisible = false;
+                    }
+                    if(huidig ==4){
+                        info = "$9.99";
+                        infoIsVisible = false;
+                    }
+                    if(huidig ==5){
+                        info = "$2.99";
+                        infoIsVisible = false;
+                    }
                 }
-                if(huidig ==1){
-                   
-                    info = "STAAR WAAAARRSSSS";
-                }
-                if(huidig ==2){
-                    
-                    info = "KUNDE GIJ NE WHEELIE?";
-                }
-                if(huidig ==3){
-                    
-                    info = "PEW PEW PEW";
-                }
-                if(huidig ==4){
-                    
-                    info = "WHAT HAPPENS IN VEGAS STAYS IN VEGAS";
-                }
-                if(huidig ==5){
-                    
-                    info = "NO MAN NO MAN NO MAN";
+                else{
+                    info= "";
+                    infoIsVisible = true;
                 }
                 infoFilm.setTextContent(info, HVisible.NORMAL_STATE);
                 infoFilm.repaint();
             }
             if(e.getCode()==HRcEvent.VK_RIGHT){
                 huidig++;
+                info = "";
+                infoIsVisible = true;
                 if(huidig>5){
                     huidig = 0;
                 }
             }
             if(e.getCode()==HRcEvent.VK_LEFT){
+                info = "";
+                infoIsVisible = true;
                 huidig--;
                 if(huidig<0){
                     huidig = 5;
                 }
             }
-            if(e.getCode()==HRcEvent.VK_UP){
-                huidig = 6;
+            if(e.getCode()==HRcEvent.VK_DOWN){
+                bestelling = " \n";
+                if(factuurIsVisible == false){
+                    huidig = 6;
+                    info = "";
+                    factuurIsVisible = true;
+                }
+                else{
+                    huidig = 1;
+                    info = "";
+                    factuurIsVisible = false;
+                }
+                hst.setTextContent(bestelling, HVisible.NORMAL_STATE);
+                hst.repaint();
             }
+            infoFilm.setTextContent(info, HVisible.NORMAL_STATE);
+            infoFilm.repaint();
+            
             try{
                 bgConfiguration.displayImage(image[huidig]);
             }
@@ -209,7 +244,6 @@ UserEventListener{
     
     public void startXlet() {
         //Al de andere code
-        
         
     }
 
