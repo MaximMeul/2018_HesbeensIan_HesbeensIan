@@ -40,6 +40,7 @@ UserEventListener{
  int huidig = 0;
     private HScene scene;
     private HStaticText hst;
+    private HStaticText infoFilm;
   
     public HelloTVXlet() {
         
@@ -98,12 +99,14 @@ UserEventListener{
        //private HStaticText hst;
        
        hst = new HStaticText(" \n",400,100,300,400); //x,y,w,h
+       infoFilm = new HStaticText("qsdsqdqsds \n",50,300,300,400); //x,y,w,h
        hst.setVerticalAlignment(HStaticText.VALIGN_TOP);
        hst.setHorizontalAlignment(HStaticText.HALIGN_RIGHT);
        //TO DO: gebruik string tekst = hst.getTextContent(HVisible.NORMAL_STATE);
        //en hst.setTextContent(text, HVisible.NORMAL_STATE); om de tekst aan te passen
        //in UserEventReceived
        scene.add(hst);
+       scene.add(infoFilm);
        scene.validate();
        scene.setVisible(true);
     }
@@ -130,25 +133,54 @@ UserEventListener{
             if(e.getCode()==HRcEvent.VK_ENTER){
                 String bestelling = hst.getTextContent(HVisible.NORMAL_STATE);
                 if(huidig ==0){
-                    bestelling = bestelling + "Batman - The Dark Knight\n";  
+                    bestelling = bestelling + "Batman - The Dark Knight\n";
                 }
                 if(huidig ==1){
-                    bestelling = bestelling + "Star Wars - The Last Jedi\n";  
+                    bestelling = bestelling + "Star Wars - The Last Jedi\n";
                 }
                 if(huidig ==2){
-                    bestelling = bestelling + "New Kids - Turbo\n";  
+                    bestelling = bestelling + "New Kids - Turbo\n";
                 }
                 if(huidig ==3){
-                    bestelling = bestelling + "The Avengers\n";  
+                    bestelling = bestelling + "The Avengers\n";
                 }
                 if(huidig ==4){
-                    bestelling = bestelling + "The Hangover\n";  
+                    bestelling = bestelling + "The Hangover\n";
                 }
                 if(huidig ==5){
                     bestelling = bestelling + "Yes Man\n";  
                 }
                 hst.setTextContent(bestelling, HVisible.NORMAL_STATE);
-                  hst.repaint();
+                  hst.repaint();             
+            }
+            if(e.getCode()==HRcEvent.VK_DOWN){
+                String info = infoFilm.getTextContent(HVisible.NORMAL_STATE);
+                if(huidig ==0){
+                    
+                    info = "BATMAAAAAN";
+                }
+                if(huidig ==1){
+                   
+                    info = "STAAR WAAAARRSSSS";
+                }
+                if(huidig ==2){
+                    
+                    info = "KUNDE GIJ NE WHEELIE?";
+                }
+                if(huidig ==3){
+                    
+                    info = "PEW PEW PEW";
+                }
+                if(huidig ==4){
+                    
+                    info = "WHAT HAPPENS IN VEGAS STAYS IN VEGAS";
+                }
+                if(huidig ==5){
+                    
+                    info = "NO MAN NO MAN NO MAN";
+                }
+                infoFilm.setTextContent(info, HVisible.NORMAL_STATE);
+                infoFilm.repaint();
             }
             if(e.getCode()==HRcEvent.VK_RIGHT){
                 huidig++;
