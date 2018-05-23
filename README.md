@@ -11,3 +11,7 @@ Mijn project is een app waar je films kan bestellen via je proximusaccount op je
 
 ### Afbeeldingen
 Afbeeldingen die in "//C:\Program Files\TechnoTrend\TT-MHP-Browser\fileio\DSMCC\0.0.3" staan, staan in de map "kopie_afbeeldingen".
+
+### Naam van het project in NetBeans
+**TestGit**
+
